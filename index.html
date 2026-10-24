@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ARVABRANCH — Software a la medida, automatizaciones y bots</title>
+  <meta name="description" content="ARVABRANCH desarrolla software a la medida, automatizaciones, bots y páginas web con agendamiento y pasarelas de pago." />
+  <meta name="theme-color" content="#07090d" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307090d'/%3E%3Cpath d='M16 26V14M16 18l-6-6M16 15l6-6' stroke='%2334f5c5' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="brand" aria-label="ARVABRANCH inicio">
+        <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 28V14M16 19l-7-7M16 15l7-7M9 12V7M23 8h4" />
+        </svg>
+        <span>ARVA<b>BRANCH</b></span>
+      </a>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#demo">Demo</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#faq">Preguntas</a>
+      </nav>
+      <a href="#contacto" class="btn btn--small btn--primary">Hablemos</a>
+      <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <a href="#servicios">Servicios</a>
+      <a href="#demo">Demo</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#faq">Preguntas</a>
+      <a href="#contacto" class="btn btn--primary">Hablemos</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <canvas id="branches" class="hero__canvas" aria-hidden="true"></canvas>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__content">
+        <p class="eyebrow reveal"><span class="dot"></span> Estudio de software · Latinoamérica</p>
+        <h1 class="hero__title reveal">
+          Hacemos crecer<br />tu negocio en <span class="grad" id="rotator">software a la medida</span>
+        </h1>
+        <p class="hero__lead reveal">
+          Diseñamos y construimos el software, las automatizaciones y los bots que tu operación necesita —
+          y páginas web que agendan citas y cobran solas, las 24 horas.
+        </p>
+        <div class="hero__cta reveal">
+          <a href="#contacto" class="btn btn--primary btn--lg">
+            Cotiza tu proyecto
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+          <a href="#demo" class="btn btn--ghost btn--lg">Ver demo en vivo</a>
+        </div>
+        <ul class="hero__chips reveal" aria-label="Tecnologías">
+          <li>WhatsApp API</li><li>Stripe</li><li>Mercado Pago</li><li>Wompi</li><li>Google Calendar</li><li>IA generativa</li>
+        </ul>
+      </div>
+      <a href="#servicios" class="scroll-hint" aria-label="Ir a servicios"><span></span></a>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="servicios">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Lo que hacemos</p>
+          <h2>Una rama para cada<br />necesidad de tu empresa</h2>
+          <p class="section__lead">Desde una idea en una servilleta hasta un sistema en producción. Tú te enfocas en vender; nosotros en que la tecnología trabaje por ti.</p>
+        </header>
+
+        <div class="bento">
+          <article class="card card--xl reveal" data-tilt>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6M14 4l-4 16" /></svg>
+            </div>
+            <h3>Software a la medida</h3>
+            <p>Plataformas web, apps, CRMs, ERPs y paneles internos construidos exactamente para tu proceso. Sin licencias que no usas, sin forzar tu negocio a una plantilla.</p>
+            <ul class="ticks">
+              <li>Sistemas de gestión e inventario</li>
+              <li>Portales de clientes y dashboards</li>
+              <li>Integraciones con tus herramientas actuales</li>
+            </ul>
+            <div class="code" aria-hidden="true">
+              <div class="code__bar"><i></i><i></i><i></i><span>arvabranch.ts</span></div>
+<pre><code><span class="k">const</span> negocio = <span class="f">await</span> arva.<span class="m">construir</span>({
+  proceso: <span class="s">"el tuyo"</span>,
+  plantillas: <span class="n">false</span>,
+  escala: <span class="s">"ilimitada"</span>,
+});</code></pre>
+            </div>
+          </article>
+
+          <article class="card reveal" data-tilt>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" /></svg>
+            </div>
+            <h3>Automatizaciones</h3>
+            <p>Eliminamos las tareas repetitivas: facturas, reportes, seguimientos, sincronización de datos entre apps. Lo que hoy toma horas, mañana toma segundos.</p>
+            <div class="flow" aria-hidden="true">
+              <span>Formulario</span><i></i><span>CRM</span><i></i><span>Factura</span><i></i><span>Email</span>
+            </div>
+          </article>
+
+          <article class="card reveal" data-tilt>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3" /><path d="M12 7V4M9 13h.01M15 13h.01M9 17h6" /></svg>
+            </div>
+            <h3>Bots inteligentes</h3>
+            <p>Asistentes con IA para WhatsApp, Instagram, Telegram y tu web que responden, califican clientes y venden mientras duermes.</p>
+            <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+          </article>
+
+          <article class="card card--wide reveal" data-tilt>
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>
+            </div>
+            <div class="card--wide__text">
+              <h3>Webs con agendamiento y pagos</h3>
+              <p>Páginas informativas rápidas y hermosas donde tus clientes reservan una cita, pagan en línea y reciben confirmación automática. Tu agenda llena, sin llamadas ni transferencias perdidas.</p>
+              <div class="pills">
+                <span>Reservas online</span><span>Recordatorios</span><span>Pagos con tarjeta y PSE</span><span>SEO</span>
+              </div>
+            </div>
+            <div class="mini-pay" aria-hidden="true">
+              <div class="mini-pay__row"><span>Consulta · 45 min</span><b>$120.000</b></div>
+              <div class="mini-pay__row muted"><span>Jue 14 · 3:30 pm</span><span>✓ Disponible</span></div>
+              <div class="mini-pay__btn">Pagar y reservar</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="container stats__grid">
+        <div class="stat reveal"><b data-count="24" data-suffix="/7">0</b><span>Tu negocio atendiendo y cobrando</span></div>
+        <div class="stat reveal"><b data-count="70" data-suffix="%">0</b><span>Menos tareas manuales con automatización*</span></div>
+        <div class="stat reveal"><b data-count="100" data-suffix="%">0</b><span>Código a la medida, propiedad tuya</span></div>
+        <div class="stat reveal"><b data-count="4" data-prefix="&lt;" data-suffix=" sem">0</b><span>Para lanzar una web con reservas y pagos*</span></div>
+      </div>
+      <p class="container stats__note">* Valores de referencia; cada proyecto se estima según su alcance.</p>
+    </section>
+
+    <!-- DEMO -->
+    <section class="section" id="demo">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Pruébalo tú mismo</p>
+          <h2>Así se siente lo que<br />construimos para tus clientes</h2>
+          <p class="section__lead">Dos demos interactivas: una reserva con pago en línea y un bot que atiende por WhatsApp.</p>
+        </header>
+
+        <div class="demo">
+          <!-- Booking demo -->
+          <div class="panel reveal" id="booking">
+            <div class="panel__head">
+              <div>
+                <p class="panel__kicker">Reserva tu cita</p>
+                <h3 id="month-label">Noviembre</h3>
+              </div>
+              <div class="steps" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+            </div>
+
+            <div class="booking__step" data-step="1">
+              <div class="days" role="listbox" aria-label="Elige un día"></div>
+              <p class="label">Horarios disponibles</p>
+              <div class="slots" role="listbox" aria-label="Elige una hora"></div>
+              <button class="btn btn--primary btn--block" id="to-pay" disabled>Continuar</button>
+            </div>
+
+            <div class="booking__step" data-step="2" hidden>
+              <div class="summary">
+                <div><span>Servicio</span><b>Asesoría de 45 min</b></div>
+                <div><span>Fecha</span><b id="sum-date">—</b></div>
+                <div class="total"><span>Total</span><b>$120.000 COP</b></div>
+              </div>
+              <div class="cardfx" aria-hidden="true">
+                <div class="cardfx__chip"></div>
+                <div class="cardfx__num">4242 4242 4242 4242</div>
+                <div class="cardfx__foot"><span>CLIENTE DEMO</span><span>12/29</span></div>
+              </div>
+              <button class="btn btn--primary btn--block" id="pay">
+                <span class="pay__label">Pagar $120.000</span>
+                <span class="spinner" aria-hidden="true"></span>
+              </button>
+              <button class="link-btn" id="back">← Cambiar horario</button>
+            </div>
+
+            <div class="booking__step done" data-step="3" hidden>
+              <svg class="check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" /><path d="M15 27l7 7 15-15" /></svg>
+              <h4>¡Reserva confirmada!</h4>
+              <p id="done-text">Te enviamos la confirmación por correo y WhatsApp.</p>
+              <button class="btn btn--ghost" id="restart">Reiniciar demo</button>
+            </div>
+            <p class="panel__note">Demo ilustrativa · no se procesa ningún pago.</p>
+          </div>
+
+          <!-- Bot demo -->
+          <div class="panel phone reveal" id="bot">
+            <div class="phone__top">
+              <div class="avatar">AB</div>
+              <div><b>Asistente ARVA</b><span id="bot-status">en línea</span></div>
+            </div>
+            <div class="chat" id="chat" aria-live="polite"></div>
+            <div class="quick" id="quick"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section" id="proceso">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Cómo trabajamos</p>
+          <h2>De la semilla al fruto,<br />en cuatro pasos</h2>
+        </header>
+        <ol class="timeline">
+          <li class="reveal"><span class="timeline__n">01</span><h3>Descubrimiento</h3><p>Entendemos tu negocio, tus procesos y qué te está costando tiempo y dinero.</p></li>
+          <li class="reveal"><span class="timeline__n">02</span><h3>Diseño</h3><p>Prototipos claros para que veas y apruebes el producto antes de escribir código.</p></li>
+          <li class="reveal"><span class="timeline__n">03</span><h3>Desarrollo</h3><p>Entregas cortas y demos frecuentes. Siempre sabes en qué punto está tu proyecto.</p></li>
+          <li class="reveal"><span class="timeline__n">04</span><h3>Lanzamiento y soporte</h3><p>Publicamos, medimos y seguimos mejorando contigo. No desaparecemos al entregar.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section section--tight">
+      <div class="container why">
+        <div class="why__item reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" /></svg><h3>Seguro por diseño</h3><p>Pagos con pasarelas certificadas; nunca almacenamos datos de tarjetas.</p></div>
+        <div class="why__item reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0zM12 7v5l3 3" /></svg><h3>Rápido de verdad</h3><p>Webs optimizadas que cargan en menos de un segundo y posicionan mejor.</p></div>
+        <div class="why__item reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" /></svg><h3>Precio claro</h3><p>Cotización por alcance, sin sorpresas ni letra pequeña.</p></div>
+        <div class="why__item reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg><h3>Comunicación directa</h3><p>Hablas con quien construye tu producto, no con intermediarios.</p></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container container--narrow">
+        <header class="section__head reveal">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2>Resolvemos tus dudas</h2>
+        </header>
+        <div class="faq">
+          <details class="reveal"><summary>¿Cuánto cuesta un proyecto?</summary><p>Depende del alcance. Una página informativa con agendamiento y pagos es el punto de partida más accesible; un sistema a la medida se cotiza tras una sesión de descubrimiento gratuita.</p></details>
+          <details class="reveal"><summary>¿Con qué pasarelas de pago trabajan?</summary><p>Integramos Stripe, Mercado Pago, Wompi, PayU, PayPal y otras según tu país, para recibir tarjetas, PSE, transferencias y billeteras digitales.</p></details>
+          <details class="reveal"><summary>¿El bot puede conectarse a mi WhatsApp?</summary><p>Sí. Usamos la API oficial de WhatsApp Business y podemos conectarlo con tu agenda, tu catálogo o tu CRM para que responda con información real.</p></details>
+          <details class="reveal"><summary>¿El código es mío?</summary><p>Sí. Al finalizar recibes el código fuente y los accesos. Si quieres, seguimos con un plan de soporte y mejoras.</p></details>
+          <details class="reveal"><summary>¿Cuánto tarda el desarrollo?</summary><p>Una web con reservas y pagos suele estar lista en pocas semanas. Proyectos más grandes se entregan por fases para que empieces a usarlos cuanto antes.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contacto">
+      <div class="container contact__grid">
+        <div class="contact__text reveal">
+          <p class="eyebrow">Empecemos</p>
+          <h2>¿Listo para que tu negocio<br /><span class="grad">eche raíces digitales?</span></h2>
+          <p class="section__lead">Cuéntanos tu idea y en menos de 24 horas te respondemos con una propuesta inicial. La primera asesoría es gratis.</p>
+          <ul class="contact__list">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM4 6l8 7 8-7" /></svg> hola@arvabranch.com</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.5-7-12a7 7 0 0114 0c0 5.5-7 12-7 12z" /><circle cx="12" cy="9" r="2.5" /></svg> Atención remota en toda Latinoamérica</li>
+          </ul>
+        </div>
+
+        <form class="form panel reveal" id="contact-form" novalidate>
+          <div class="field">
+            <label for="name">Nombre</label>
+            <input id="name" name="name" autocomplete="name" required placeholder="Tu nombre" />
+          </div>
+          <div class="field">
+            <label for="email">Correo</label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="tu@empresa.com" />
+          </div>
+          <fieldset class="field">
+            <legend>¿Qué necesitas?</legend>
+            <div class="choices">
+              <label><input type="checkbox" name="service" value="Software a la medida" /><span>Software a la medida</span></label>
+              <label><input type="checkbox" name="service" value="Automatización" /><span>Automatización</span></label>
+              <label><input type="checkbox" name="service" value="Bot" /><span>Bot</span></label>
+              <label><input type="checkbox" name="service" value="Web con agenda y pagos" /><span>Web con agenda y pagos</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="msg">Cuéntanos tu idea</label>
+            <textarea id="msg" name="msg" rows="4" placeholder="Quiero que mis clientes puedan…"></textarea>
+          </div>
+          <button class="btn btn--primary btn--block btn--lg" type="submit">Enviar mensaje</button>
+          <p class="form__status" id="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#top" class="brand">
+        <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28V14M16 19l-7-7M16 15l7-7M9 12V7M23 8h4" /></svg>
+        <span>ARVA<b>BRANCH</b></span>
+      </a>
+      <p>© <span id="year"></span> ARVABRANCH. Software que crece contigo.</p>
+      <nav aria-label="Pie de página"><a href="#servicios">Servicios</a><a href="#demo">Demo</a><a href="#contacto">Contacto</a></nav>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
