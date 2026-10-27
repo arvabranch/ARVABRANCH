@@ -381,4 +381,230 @@
     formStatus.className = "form__status";
     formStatus.textContent = "¡Gracias! Abrimos tu correo para enviar el mensaje.";
   });
+
+  /* ---------- Interactive Showcase Proyectos ---------- */
+  // 1. Filtros
+  const filterBtns = $$(".proj-filter");
+  const projectCards = $$(".project-card");
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      const filter = btn.dataset.filter;
+      projectCards.forEach((card) => {
+        const cat = card.dataset.category || "";
+        const match = filter === "all" || cat.includes(filter);
+        card.classList.toggle("is-hidden", !match);
+      });
+    });
+  });
+
+  // 2. Mockup 1: Ana Faber Luxury Selector
+  const luxSvcs = $$(".mock-lux__svc");
+  const luxTotal = $("#lux-total");
+  const luxTime = $("#lux-time");
+  const luxSlots = $("#lux-slots");
+  luxSvcs.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      luxSvcs.forEach((b) => {
+        b.classList.remove("is-selected");
+        b.setAttribute("aria-checked", "false");
+      });
+      btn.classList.add("is-selected");
+      btn.setAttribute("aria-checked", "true");
+      if (luxTotal) luxTotal.textContent = btn.dataset.price;
+      if (luxTime) luxTime.textContent = `⏱ Duración: ${btn.dataset.time}`;
+      if (luxSlots) luxSlots.textContent = `● ${btn.dataset.slots}`;
+    });
+  });
+
+  // 3. Mockup 2: Dra. Ana Faber Treatments Switcher
+  const medTabs = $$(".mock-med__tab");
+  const medList = $("#med-list");
+  const treatmentsData = {
+    facial: [
+      "✨ Armonización Facial",
+      "✨ Toxina Botulínica (Botox)",
+      "✨ Perfilamiento de Labios",
+      "✨ Rinomodelación"
+    ],
+    corporal: [
+      "⚡ Depilación Láser 4D Vellux",
+      "⚡ Lipopapada con Enzimas",
+      "⚡ Endoláser Corporal",
+      "⚡ Tensamax & Reafirmación"
+    ],
+    rejuvenecimiento: [
+      "🌿 Bioestimuladores de Colágeno",
+      "🌿 Plasma Rico en Plaquetas (PRP)",
+      "🌿 Peeling Químico Clínico",
+      "🌿 Exosomas & Skinbooster"
+    ]
+  };
+  medTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      medTabs.forEach((t) => {
+        t.classList.remove("is-active");
+        t.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("is-active");
+      tab.setAttribute("aria-selected", "true");
+      const cat = tab.dataset.cat;
+      const items = treatmentsData[cat] || treatmentsData.facial;
+      if (medList) {
+        medList.innerHTML = items.map((i) => `<span class="mock-med__item">${i}</span>`).join("");
+      }
+    });
+  });
+
+  // 4. Mockup 3: Bertha Upegui Emotion Picker
+  const thEmotions = $$(".mock-th__emo");
+  const thMsg = $("#th-msg");
+  const emotionResponses = {
+    ansiedad: `"Aprender a regular tu respiración, pausar y comprender lo que tu mente experimenta es un camino que transitamos juntos."`,
+    cansancio: `"La sobrecarga emocional y el agotamiento mental tienen solución. Date el permiso de descansar y pedir apoyo."`,
+    tristeza: `"No tienes que sostenerlo todo a solas. Hay un espacio cálido, sin juicio y confidencial esperándote."`,
+    confusion: `"Si no sabes bien qué sientes o hacia dónde avanzar, ordenar las piezas juntos en sesión es el primer paso."`,
+    bien: `"El crecimiento personal y el autoconocimiento también se potencian cuando te sientes bien y buscas plenitud."`
+  };
+  thEmotions.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      thEmotions.forEach((b) => {
+        b.classList.remove("is-active");
+        b.setAttribute("aria-checked", "false");
+      });
+      btn.classList.add("is-active");
+      btn.setAttribute("aria-checked", "true");
+      const emo = btn.dataset.emo;
+      if (thMsg && emotionResponses[emo]) {
+        thMsg.style.opacity = "0";
+        setTimeout(() => {
+          thMsg.textContent = emotionResponses[emo];
+          thMsg.style.opacity = "1";
+        }, 120);
+      }
+    });
+  });
+
+  // Control de vista: Imagen Real vs Simulador Interactivo
+  $$(".browser-mockup").forEach((mockup) => {
+    const switches = $$(".mock-switch", mockup);
+    const views = $$(".browser-mockup__view", mockup);
+    switches.forEach((sw) => {
+      sw.addEventListener("click", () => {
+        const targetView = sw.dataset.view;
+        switches.forEach((s) => {
+          s.classList.remove("is-active");
+          s.setAttribute("aria-selected", "false");
+        });
+        sw.classList.add("is-active");
+        sw.setAttribute("aria-selected", "true");
+        views.forEach((v) => {
+          const isMatch = v.classList.contains(`browser-mockup__view--${targetView}`);
+          v.classList.toggle("is-active", isMatch);
+        });
+      });
+    });
+  });
+
+  // 5. Modal Ficha Técnica
+  const modal = $("#proj-modal");
+  const modalContent = $("#modal-content");
+  const modalClose = $("#modal-close");
+  const modalBackdrop = $("#modal-backdrop");
+
+  const projectSheets = {
+    anafaberluxury: {
+      title: "Ana Faber Luxury",
+      lead: "Página web con sistema de agendamiento 24/7 y confirmación directa",
+      client: "Ana Faber Luxury (Cali, Colombia) · Sector Belleza & Spa",
+      img: "assets/projects/anafaberluxury_preview.png",
+      challenge: "Coordinar citas manualmente por WhatsApp causaba demoras en responder y pérdida de clientes en horas no laborales.",
+      solution: "Implementamos una agenda interactiva en tiempo real donde las clientas seleccionan servicio y turno en 3 pasos con confirmación automática.",
+      results: "100% de reservas autogestionadas por el cliente, 0 llamadas perdidas en fin de semana y una agenda que se llena sola.",
+      url: "https://dranafaberluxury.nbmates.com"
+    },
+    dranafaber: {
+      title: "Dra. Ana Cristina Faber",
+      lead: "Web médica institucional y posicionamiento de marca de alta gama",
+      client: "Dra. Ana Cristina Faber (Cali, Colombia) · Medicina Estética & Antiaging",
+      img: "assets/projects/dranafaber_preview.png",
+      challenge: "La clínica requería proyectar máxima reputación científica, diferenciarse de centros empíricos y educar al paciente antes de llegar a consulta.",
+      solution: "Construimos un portal institucional de alta gama con catálogo médico completo de más de 25 tratamientos y comparativa clínica de resultados reales.",
+      results: "Incremento directo en la confianza del paciente previo a la consulta y una presentación exclusiva acorde a una práctica médica premium.",
+      url: "https://dranafaber.nbmates.com/inicio"
+    },
+    berthaupegui: {
+      title: "Bertha Upegui Galofre",
+      lead: "Plataforma de psicoterapia online con cobro internacional en USD",
+      client: "Psi. Bertha Cecilia Upegui (Atención Global en Español) · Salud Mental",
+      img: "assets/projects/berthaupegui_preview.png",
+      challenge: "Con pacientes en diversos países, coordinar husos horarios y recibir transferencias generaba confusiones de agenda y trabas cambiarias.",
+      solution: "Desarrollamos una experiencia cálida con ajuste automático de zona horaria según el país del paciente y cobro seguro en dólares con tarjeta.",
+      results: "Pacientes en más de 10 países atendidos sin errores de horario y pagos recibidos al instante sin intermediarios bancarios.",
+      url: "https://berthaupegui.arvabranch.com"
+    }
+  };
+
+  const openModal = (projId) => {
+    const data = projectSheets[projId];
+    if (!data || !modal || !modalContent) return;
+    modalContent.innerHTML = `
+      <div class="modal-sheet">
+        <div class="modal-sheet__head">
+          <span class="proj-tag proj-tag--accent">${data.client}</span>
+          <h3 id="modal-title">${data.title}</h3>
+          <p>${data.lead}</p>
+        </div>
+
+        <div class="modal-sheet__img-preview" style="border-radius: 14px; overflow: hidden; border: 1px solid var(--separator); max-height: 220px;">
+          <img src="${data.img}" alt="${data.title}" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block;" />
+        </div>
+
+        <div class="modal-sheet__section">
+          <h4>El Reto</h4>
+          <p>${data.challenge}</p>
+        </div>
+
+        <div class="modal-sheet__section">
+          <h4>Solución ARVABRANCH</h4>
+          <p>${data.solution}</p>
+        </div>
+
+        <div class="modal-sheet__section">
+          <h4>Resultados Clave</h4>
+          <p>${data.results}</p>
+        </div>
+
+        <div class="modal-sheet__footer">
+          <a href="${data.url}" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+            Visitar sitio en vivo
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+      </div>
+    `;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  };
+
+  $$(".open-modal-btn").forEach((btn) => {
+    btn.addEventListener("click", () => openModal(btn.dataset.project));
+  });
+
+  if (modalClose) modalClose.addEventListener("click", closeModal);
+  if (modalBackdrop) modalBackdrop.addEventListener("click", closeModal);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal && !modal.hidden) closeModal();
+  });
 })();
