@@ -1003,7 +1003,7 @@
           <ul class="contact__list">
             <li><svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4 4h16v16H4zM4 6l8 7 8-7" />
-              </svg> hola@arvabranch.com</li>
+              </svg> <a href="mailto:arvabranch@gmail.com">arvabranch@gmail.com</a></li>
             <li><svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 21s-7-6.5-7-12a7 7 0 0114 0c0 5.5-7 12-7 12z" />
                 <circle cx="12" cy="9" r="2.5" />
@@ -1035,7 +1035,15 @@
             <label for="msg">Cuéntanos tu idea</label>
             <textarea id="msg" name="msg" rows="4" placeholder="Quiero que mis clientes puedan…"></textarea>
           </div>
-          <button class="btn btn--primary btn--block btn--lg" type="submit">Enviar mensaje</button>
+          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <label class="consent">
+            <input type="checkbox" id="consent" required />
+            <span>Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y el tratamiento de mis datos para recibir respuesta.</span>
+          </label>
+          <button class="btn btn--primary btn--block btn--lg" type="submit" id="send-btn">
+            <span class="send__label">Enviar mensaje</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
           <p class="form__status" id="form-status" role="status"></p>
         </form>
       </div>
@@ -1052,6 +1060,11 @@
       </a>
       <p>© <span id="year"></span> ARVABRANCH. Software que crece contigo.</p>
       <nav aria-label="Pie de página"><a href="#servicios">Servicios</a><a href="#demo">Demo</a><a href="#proceso">Proceso</a><a href="#proyectos">Casos de éxito</a><a href="#contacto">Contacto</a></nav>
+    </div>
+    <div class="container footer__legal">
+      <a href="privacidad.html">Política de privacidad</a>
+      <a href="terminos.html">Términos y condiciones</a>
+      <a href="mailto:arvabranch@gmail.com">arvabranch@gmail.com</a>
     </div>
   </footer>
 

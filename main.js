@@ -359,12 +359,17 @@
   botIO.observe($("#bot"));
 
   /* ---------- Contact form ---------- */
+  // Envío con FormSubmit (sin backend). El primer envío manda un correo de activación a arvabranch@gmail.com.
+  const FORM_ENDPOINT = "https://formsubmit.co/ajax/arvabranch@gmail.com";
   const form = $("#contact-form");
   const formStatus = $("#form-status");
+  const sendBtn = $("#send-btn");
   const nameEl = $("#name");
   const emailEl = $("#email");
-  form.addEventListener("submit", (e) => {
+  const consentEl = $("#consent");
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (form.classList.contains("sent") || sendBtn.classList.contains("loading")) return;
     const name = nameEl.value.trim();
     const email = emailEl.value.trim();
     const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -375,11 +380,47 @@
       formStatus.textContent = "Revisa tu nombre y correo, por favor.";
       return;
     }
+    if (!consentEl.checked) {
+      formStatus.className = "form__status err";
+      formStatus.textContent = "Debes aceptar la política de privacidad para enviar.";
+      return;
+    }
+    if (form._honey.value) return; // bot
+
     const services = $$('input[name="service"]:checked', form).map((i) => i.value).join(", ") || "Sin especificar";
-    const body = `Nombre: ${name}\nCorreo: ${email}\nServicios: ${services}\n\n${$("#msg").value.trim()}`;
-    window.location.href = `mailto:hola@arvabranch.com?subject=${encodeURIComponent("Nuevo proyecto — " + name)}&body=${encodeURIComponent(body)}`;
+    sendBtn.classList.add("loading");
+    sendBtn.disabled = true;
     formStatus.className = "form__status";
-    formStatus.textContent = "¡Gracias! Abrimos tu correo para enviar el mensaje.";
+    formStatus.textContent = "";
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          Nombre: name,
+          Correo: email,
+          Servicios: services,
+          Mensaje: $("#msg").value.trim() || "(sin mensaje)",
+          _replyto: email,
+          _subject: `Nuevo proyecto — ${name}`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.success === "false" || data.success === false) throw new Error(data.message || "error");
+      // Enviado: el formulario queda bloqueado hasta recargar la página
+      sendBtn.classList.remove("loading");
+      form.classList.add("sent");
+      $$("input, textarea, button", form).forEach((el) => { el.disabled = true; });
+      $(".send__label", sendBtn).textContent = "✓ Enviado";
+      formStatus.textContent = "¡Mensaje enviado! Te responderemos en menos de 24 horas.";
+    } catch (err) {
+      sendBtn.classList.remove("loading");
+      sendBtn.disabled = false;
+      formStatus.className = "form__status err";
+      formStatus.innerHTML = 'No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos a <a href="mailto:arvabranch@gmail.com">arvabranch@gmail.com</a>.';
+    }
   });
 
   /* ---------- Interactive Showcase Proyectos ---------- */
