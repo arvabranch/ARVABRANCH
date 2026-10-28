@@ -419,7 +419,15 @@
       sendBtn.classList.remove("loading");
       sendBtn.disabled = false;
       formStatus.className = "form__status err";
-      formStatus.innerHTML = 'No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos a <a href="mailto:arvabranch@gmail.com">arvabranch@gmail.com</a>.';
+      const reason = String(err && err.message);
+      if (/Activation/i.test(reason)) {
+        // Falta activar el formulario desde el correo "Activate Form" de FormSubmit
+        formStatus.innerHTML = 'El formulario aún se está activando. Mientras tanto escríbenos a <a href="mailto:arvabranch@gmail.com">arvabranch@gmail.com</a>.';
+      } else if (/web server/i.test(reason) || location.protocol === "file:") {
+        formStatus.textContent = "El formulario solo funciona con la página publicada o abierta desde un servidor, no como archivo local.";
+      } else {
+        formStatus.innerHTML = 'No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos a <a href="mailto:arvabranch@gmail.com">arvabranch@gmail.com</a>.';
+      }
     }
   });
 
