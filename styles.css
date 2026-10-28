@@ -1616,6 +1616,121 @@ p { margin: 0; }
   .scroll-hint { display: none; }
 }
 
+/* ============ Floating CTA ============ */
+.fab-cta {
+  position: fixed; z-index: 45;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 48px; padding: 0 18px 0 16px; border-radius: 999px;
+  font: 600 0.92rem/1 var(--font); color: var(--label);
+  border: 1px solid transparent;
+  background:
+    linear-gradient(color-mix(in srgb, var(--surface-solid) 86%, transparent), color-mix(in srgb, var(--surface-solid) 86%, transparent)) padding-box,
+    var(--grad) border-box;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: 0 12px 32px -14px rgba(0, 0, 0, 0.7), 0 0 0 0 rgba(52, 245, 197, 0);
+  opacity: 0; transform: translateY(14px) scale(0.96); pointer-events: none;
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), box-shadow 0.3s var(--ease);
+}
+.fab-cta.is-visible { opacity: 0.94; transform: none; pointer-events: auto; }
+.fab-cta.is-visible:hover { opacity: 1; transform: translateY(-2px); box-shadow: 0 16px 36px -14px rgba(0, 0, 0, 0.75), 0 0 24px -6px rgba(52, 245, 197, 0.45); }
+.fab-cta__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--grad); box-shadow: 0 0 10px rgba(52, 245, 197, 0.7); }
+.fab-cta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.7; transition: transform 0.25s var(--ease); }
+.fab-cta:hover svg { transform: translateX(2px); }
+
+/* ============ Responsive refinements ============ */
+/* Menos ramas detrás del texto del hero para que se lea mejor */
+.hero__canvas {
+  -webkit-mask-image: radial-gradient(ellipse 50% 40% at 50% 46%, rgba(0, 0, 0, 0.18) 0%, #000 78%);
+  mask-image: radial-gradient(ellipse 50% 40% at 50% 46%, rgba(0, 0, 0, 0.18) 0%, #000 78%);
+}
+.section__head h2, .hero__title, .hero__lead, .section__lead { text-wrap: balance; }
+
+.nav__links a { white-space: nowrap; }
+@media (min-width: 1001px) { .mobile-menu { display: none !important; } }
+@media (max-width: 1000px) {
+  .nav__links, .nav__inner > .btn { display: none; }
+  .nav__toggle { display: block; }
+}
+
+@media (max-width: 1000px) and (min-width: 761px) {
+  .timeline { column-gap: 28px; }
+  .contact__grid { max-width: 640px; margin-inline: auto; }
+}
+
+@media (max-width: 760px) {
+  .section { padding: 72px 0; }
+  .section__head { margin-bottom: 36px; }
+  .section__lead { font-size: 1.02rem; }
+
+  /* Etiquetas centradas: el punto queda pegado al texto aunque haga salto de línea */
+  .hero .eyebrow, .section__head .eyebrow {
+    display: block; text-align: center; font-size: 0.72rem; letter-spacing: 0.12em; line-height: 1.7; text-wrap: balance;
+  }
+  .hero .eyebrow .dot, .section__head .eyebrow .dot { display: inline-block; vertical-align: 0.12em; margin-right: 8px; }
+
+  .hero__canvas {
+    -webkit-mask-image: radial-gradient(ellipse 85% 38% at 50% 44%, rgba(0, 0, 0, 0.12) 0%, #000 82%);
+    mask-image: radial-gradient(ellipse 85% 38% at 50% 44%, rgba(0, 0, 0, 0.12) 0%, #000 82%);
+  }
+  .hero__lead { font-size: 1.04rem; margin-bottom: 30px; }
+  .hero__chips { margin-top: 36px; gap: 8px; }
+  .hero__chips li { font-size: 0.78rem; padding: 6px 12px; }
+
+  /* Filtros de proyectos en una sola fila deslizable */
+  .projects__filter-bar {
+    flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto;
+    margin: 0 -16px 32px; padding: 4px 16px;
+    scrollbar-width: none; scroll-snap-type: x proximity;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 32px), transparent);
+    mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 32px), transparent);
+  }
+  .projects__filter-bar::-webkit-scrollbar { display: none; }
+  .proj-filter { flex: none; scroll-snap-align: start; }
+
+  /* Selector de vista del mockup como control segmentado */
+  .browser-mockup__switch { padding: 8px; gap: 4px; }
+  .mock-switch { flex: 1; justify-content: center; padding: 9px 6px; font-size: 0.74rem; line-height: 1.2; text-align: center; }
+  .browser-mockup__img-cta { padding: 12px; }
+  .browser-mockup__img-cta span { font-size: 0.74rem; padding: 6px 12px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* Línea de tiempo vertical compacta */
+  .timeline { gap: 0; }
+  .timeline li { display: grid; grid-template-columns: 48px 1fr; column-gap: 18px; padding: 0 0 30px; }
+  .timeline li:not(:last-child)::after {
+    content: ""; position: absolute; left: 23px; top: 52px; bottom: 4px; width: 2px; border-radius: 2px;
+    background: var(--grad); opacity: 0.3;
+  }
+  .timeline__n { grid-row: span 2; width: 48px; height: 48px; margin: 0; font-size: 0.9rem; box-shadow: 0 0 22px rgba(52, 245, 197, 0.25); }
+  .timeline h3 { font-size: 1.15rem; margin: 4px 0 6px; align-self: end; }
+
+  .why { gap: 12px; }
+  .why__item { display: grid; grid-template-columns: 28px 1fr; column-gap: 16px; padding: 20px; }
+  .why__item svg { grid-row: span 2; margin: 2px 0 0; }
+  .why__item h3 { margin-bottom: 4px; }
+
+  .stats__grid { column-gap: 12px; }
+  .stat span { font-size: 0.88rem; display: block; max-width: 160px; margin-inline: auto; }
+
+  .faq summary { padding: 18px 52px 18px 20px; font-size: 1rem; }
+  .faq details p { padding: 0 20px 18px; font-size: 0.96rem; }
+
+  .footer__inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .footer nav { flex-wrap: wrap; gap: 10px 20px; }
+  .footer nav a { white-space: nowrap; }
+
+  .fab-cta { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); min-height: 46px; }
+}
+
+@media (max-width: 380px) {
+  .hero__title { font-size: 2.35rem; }
+  .days { gap: 4px; }
+  .day b { font-size: 1rem; }
+  .slots { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }

@@ -358,6 +358,32 @@
   }, { threshold: 0.4 });
   botIO.observe($("#bot"));
 
+  /* ---------- Floating "Hablemos" ---------- */
+  // Aparece cuando la persona deja de hacer scroll y se oculta en cuanto vuelve a moverse.
+  // No se muestra sobre el hero (ya tiene sus botones), ni con el formulario a la vista, ni con el menú abierto.
+  const fab = $("#fab-cta");
+  const heroEl = $(".hero");
+  const contactEl = $("#contacto");
+  const IDLE_MS = 850;
+  let idleTimer = 0;
+
+  const setFab = (show) => {
+    fab.classList.toggle("is-visible", show);
+    fab.setAttribute("aria-hidden", String(!show));
+    fab.tabIndex = show ? 0 : -1;
+  };
+  const contactInView = () => contactEl.getBoundingClientRect().top < window.innerHeight * 0.85;
+  const canShowFab = () =>
+    window.scrollY > heroEl.offsetHeight * 0.7 && !contactInView() && menu.hidden;
+
+  window.addEventListener("scroll", () => {
+    setFab(false);
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => setFab(canShowFab()), IDLE_MS);
+  }, { passive: true });
+  toggle.addEventListener("click", () => setFab(false));
+  fab.addEventListener("click", () => setFab(false));
+
   /* ---------- Contact form ---------- */
   // Envío con /api/contact (función de Vercel + Resend, correo con diseño de marca)
   const API_ENDPOINT = "/api/contact";
