@@ -359,48 +359,16 @@
   botIO.observe($("#bot"));
 
   /* ---------- Contact form ---------- */
-  // Envío principal con /api/contact (Vercel + Resend, correo con diseño de marca).
-  // Si la función no existe o no está configurada, se usa FormSubmit como respaldo.
+  // Envío con /api/contact (función de Vercel + Resend, correo con diseño de marca)
   const API_ENDPOINT = "/api/contact";
-  const FORM_ENDPOINT = "https://formsubmit.co/ajax/arvabranch@gmail.com";
-
-  const sendWithApi = async (payload) => {
-    const res = await fetch(API_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (res.ok) return true;
-    // 404/405/501: sin función (servidor local), 503: falta RESEND_API_KEY → usar respaldo
-    if ([404, 405, 501, 503].includes(res.status)) return false;
-    const data = await res.json().catch(() => ({}));
-    throw new Error(data.message || "error");
-  };
-
-  const sendWithFormSubmit = async ({ name, email, services, message }) => {
-    const res = await fetch(FORM_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        Nombre: name,
-        Correo: email,
-        Servicios: services.join(", ") || "Sin especificar",
-        Mensaje: message || "(sin mensaje)",
-        _replyto: email,
-        _subject: `Nuevo proyecto — ${name}`,
-        _template: "table",
-        _captcha: "false",
-      }),
-    });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok || data.success === "false" || data.success === false) throw new Error(data.message || "error");
-  };
   const form = $("#contact-form");
   const formStatus = $("#form-status");
   const sendBtn = $("#send-btn");
   const nameEl = $("#name");
   const emailEl = $("#email");
   const consentEl = $("#consent");
+  const fallbackHtml = 'No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos a <a href="mailto:arvabranch@gmail.com">arvabranch@gmail.com</a>.';
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (form.classList.contains("sent") || sendBtn.classList.contains("loading")) return;
@@ -419,24 +387,25 @@
       formStatus.textContent = "Debes aceptar la política de privacidad para enviar.";
       return;
     }
-    if (form._honey.value) return; // bot
 
-    const payload = {
-      name,
-      email,
-      services: $$('input[name="service"]:checked', form).map((i) => i.value),
-      message: $("#msg").value.trim(),
-    };
     sendBtn.classList.add("loading");
     sendBtn.disabled = true;
     formStatus.className = "form__status";
     formStatus.textContent = "";
     try {
-      const sent = await sendWithApi(payload).catch((err) => {
-        if (err instanceof TypeError) return false; // red caída hacia /api → respaldo
-        throw err;
+      const res = await fetch(API_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          services: $$('input[name="service"]:checked', form).map((i) => i.value),
+          message: $("#msg").value.trim(),
+          _honey: form._honey.value,
+        }),
       });
-      if (!sent) await sendWithFormSubmit(payload);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) throw new Error(data.message || `HTTP ${res.status}`);
       // Enviado: el formulario queda bloqueado hasta recargar la página
       sendBtn.classList.remove("loading");
       form.classList.add("sent");
@@ -447,15 +416,8 @@
       sendBtn.classList.remove("loading");
       sendBtn.disabled = false;
       formStatus.className = "form__status err";
-      const reason = String(err && err.message);
-      if (/Activation/i.test(reason)) {
-        // Falta activar el formulario desde el correo "Activate Form" de FormSubmit
-        formStatus.innerHTML = 'El formulario aún se está activando. Mientras tanto escríbenos a <a href="mailto:arvabranch@gmail.com">arvabranch@gmail.com</a>.';
-      } else if (/web server/i.test(reason) || location.protocol === "file:") {
-        formStatus.textContent = "El formulario solo funciona con la página publicada o abierta desde un servidor, no como archivo local.";
-      } else {
-        formStatus.innerHTML = 'No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos a <a href="mailto:arvabranch@gmail.com">arvabranch@gmail.com</a>.';
-      }
+      if (err.message === "invalid") formStatus.textContent = "Revisa tu nombre y correo, por favor.";
+      else formStatus.innerHTML = fallbackHtml;
     }
   });
 
