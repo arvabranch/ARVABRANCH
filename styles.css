@@ -1567,6 +1567,21 @@ p { margin: 0; }
 .footer__legal { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--separator); }
 .footer__legal a { color: var(--label-3); font-size: 0.84rem; }
 .footer__legal a:hover { color: var(--label); }
+.footer__legal { align-items: center; }
+.footer__social { display: flex; gap: 10px; margin-left: auto; }
+.footer__legal .footer__social a {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: var(--label-2);
+  border: 1px solid var(--separator); background: var(--surface);
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.footer__legal .footer__social a:hover {
+  color: var(--label); transform: translateY(-2px);
+  border-color: transparent;
+  background: linear-gradient(var(--surface-solid), var(--surface-solid)) padding-box, var(--grad) border-box;
+  box-shadow: 0 8px 22px -10px rgba(52, 245, 197, 0.55);
+}
+.footer__social svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 760px) { .footer__social { margin-left: 0; width: 100%; margin-top: 6px; } }
 
 /* ============ Legal pages ============ */
 .legal { padding: 130px 0 90px; }
