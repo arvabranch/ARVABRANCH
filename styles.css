@@ -137,7 +137,7 @@ p { margin: 0; }
 .nav__inner { display: flex; align-items: center; gap: 24px; height: 68px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; letter-spacing: 0.04em; font-size: 1.05rem; }
 .brand b { font-weight: 700; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.brand__mark { width: 30px; height: 30px; fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px rgba(52, 245, 197, 0.5)); }
+.brand__mark { flex: none; width: 40px; height: 40px; background: var(--grad); -webkit-mask: url("assets/brand/arva-mark.png") center / contain no-repeat; mask: url("assets/brand/arva-mark.png") center / contain no-repeat; filter: drop-shadow(0 0 8px rgba(52, 245, 197, 0.45)); }
 .nav__links { display: flex; gap: 6px; margin-left: auto; }
 .nav__links a { padding: 8px 14px; border-radius: 999px; color: var(--label-2); font-size: 0.94rem; font-weight: 500; transition: color 0.2s, background 0.2s; }
 .nav__links a:hover { color: var(--label); background: var(--surface); }
